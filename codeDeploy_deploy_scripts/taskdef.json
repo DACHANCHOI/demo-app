@@ -1,0 +1,24 @@
+{
+    "executionRoleArn": "arn:aws:iam::998858496587:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "demo",
+            "image": "998858496587.dkr.ecr.ap-northeast-2.amazonaws.com/dev-pipeline-demo:1",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "containerPort": 80
+                }
+            ]
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "family": "ap-dev-ecs-task"
+}
