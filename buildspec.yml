@@ -1,8 +1,9 @@
 version: 0.2
 env:
   variables:
+    AWS_ACCOUNT_ID: "998858496587"
     AWS_DEFAULT_REGION: "ap-northeast-2"
-    ECR_URL: "998858496587.dkr.ecr.ap-northeast-2.amazonaws.com"
+    ECR_URL: ".dkr.ecr.ap-northeast-2.amazonaws.com"
     ECR_DOCKER_IMAGE: "dev-pipeline-demo"
     ECR_DOCKER_TAG: "1"
 phases:
@@ -15,18 +16,18 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t ${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG} .
+      - docker build -t ${AWS_ACCOUNT_ID}${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG} .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push ${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG}
+      - docker push ${AWS_ACCOUNT_ID}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG}
 artifacts:
   files:
     # - ecs_deploy_scripts/appspec.yml
     # - ecs_deploy_scripts/kill_process.sh
     # - ecs_deploy_scripts/run_process.sh
-    - ecs_deploy_scripts/imagedefinitions.json
+    # - ecs_deploy_scripts/imagedefinitions.json
     - codeDeploy_deploy_scripts/appspec.yml
     - codeDeploy_deploy_scripts/taskdef.json
   discard-paths: yes
