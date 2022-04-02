@@ -2,7 +2,7 @@
     "executionRoleArn": "arn:aws:iam::014842949473:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
-            "name": "demo",
+            "name": "test",
             "image": "014842949473.dkr.ecr.ap-northeast-2.amazonaws.com/dev-pipeline-demo:latest",
             "essential": true,
             "portMappings": [
