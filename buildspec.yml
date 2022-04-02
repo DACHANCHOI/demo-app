@@ -1,12 +1,11 @@
 version: 0.2
 env:
   variables:
-    AWS_ACCOUNT_ID: 998858496587
+    AWS_ACCOUNT_ID: 014842949473
     AWS_DEFAULT_REGION: ap-northeast-2
     ECR_DOCKER_TAG: 1
     ECR_DOCKER_IMAGE: dev-pipeline-demo
-    ECR_URL: ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-2.amazonaws.com/${ECR_DOCKER_IMAGE}
-
+    ECR_URL: ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-2.amazonaws.com
 phases:
   pre_build:
     commands:
@@ -17,14 +16,14 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t ${ECR_URL}:${ECR_DOCKER_TAG} .
-      - docker tag ${ECR_URL}:${ECR_DOCKER_TAG} ${ECR_URL}:latest
+      - docker build -t ${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG} .
+      - docker tag ${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG} ${ECR_URL}/${ECR_DOCKER_IMAGE}:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push ${ECR_URL}:${ECR_DOCKER_TAG}
-      - docker push ${ECR_URL}:latest
+      - docker push ${ECR_URL}/${ECR_DOCKER_IMAGE}:${ECR_DOCKER_TAG}
+      - docker push ${ECR_URL}/${ECR_DOCKER_IMAGE}:latest
 artifacts:
   files:
     # - ecs_deploy_scripts/appspec.yml
