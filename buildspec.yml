@@ -4,7 +4,7 @@ env:
     AWS_DEFAULT_REGION: ap-northeast-2
     ECR_DOCKER_TAG: 1
     ECR_DOCKER_IMAGE: dev-pipeline-demo
-    ECR_URL: 014842949473.dkr.ecr.ap-northeast-2.amazonaws.com
+    ECR_URL: ${ACCOUNTID}.dkr.ecr.ap-northeast-2.amazonaws.com
 phases:
   pre_build:
     commands:
